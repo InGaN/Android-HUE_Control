@@ -11,6 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.Cache;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.kevin.hue_control.MESSAGE";
 
@@ -47,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.edit_ip);
         String message = editText.getText().toString();
         if(message.length() > 8) { // add a proper IPv4 validation some day...
-            Intent intent = new Intent(this, DisplayMessageActivity.class);
-            intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
+            //Intent intent = new Intent(this, DisplayMessageActivity.class);
+            //intent.putExtra(EXTRA_MESSAGE, message);
+            //startActivity(intent);
+            connectToBridge();
         }
         else {
             showAlert(getString(R.string.alert_ip_title), getString(R.string.alert_ip_message));
@@ -68,29 +80,23 @@ public class MainActivity extends AppCompatActivity {
                 });
         alertDialog.show();
     }
-    /*
-     private void connectToBridge() {
-        RequestQueue mRequestQueue;
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        mRequestQueue = new RequestQueue(cache, network);
-        mRequestQueue.start();
-        String url ="http://www.example.com";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Do something with the response
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
-                });
-        mRequestQueue.add(stringRequest);
-    }
-     */
+     private void connectToBridge() {
+         String url = "http://httpbin.org/html";
+
+         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                 new Response.Listener<String>() {
+                     @Override
+                     public void onResponse(String response) {
+                         System.out.println(response.substring(0,100));
+                     }
+                 }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+                 System.out.println("Something went wrong!");
+                 error.printStackTrace();
+             }
+         });
+         Volley.newRequestQueue(this).add(stringRequest);
+     }
 }

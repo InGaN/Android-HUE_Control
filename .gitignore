@@ -34,3 +34,5 @@ proguard/
 # Log Files
 *.log
 
+libraries
+volley_1.0.19/
