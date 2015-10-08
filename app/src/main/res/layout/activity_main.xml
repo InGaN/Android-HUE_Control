@@ -12,29 +12,36 @@
         android:textColor="#ffffff"
         android:gravity="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"        >
+    <EditText
+    android:id="@+id/edit_ip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="@string/edit_ip"
+    android:inputType="number"
+    android:maxLines="1"
+    android:maxLength="15"
+    android:digits="1234567890."
+    android:background="#eeeeee" />
 
-        <EditText
-            android:id="@+id/edit_ip"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="@string/edit_ip"
-            android:inputType="number"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:digits="1234567890."
-            android:background="#eeeeee" />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:width="35px"
-            android:height="35px"
-            android:onClick="sendMessage" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/edit_lightnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_lightnumber"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="2"
+        android:digits="1234567890"
+        android:layout_marginTop="20px"
+        android:background="#eeeeee" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search"
+        android:width="35px"
+        android:height="35px"
+        android:onClick="sendMessage" />
 
 
 

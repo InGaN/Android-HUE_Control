@@ -25,5 +25,5 @@
                 android:value="com.example.kevin.hue_control.MainActivity" />
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

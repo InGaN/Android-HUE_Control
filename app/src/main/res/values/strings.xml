@@ -4,6 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="edit_ip">Enter bridge IP address</string>
+    <string name="edit_lightnumber">Enter light number</string>
     <string name="alert_ip_title">Invalid IP address</string>
     <string name="alert_ip_message">This is not a valid IP address</string>
     <string name="button_send">Send</string>
