@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.ToggleButton;
 
 import com.android.volley.Cache;
 import com.android.volley.Request;
@@ -67,12 +69,22 @@ public class MainActivity extends AppCompatActivity {
         String ip = editIP.getText().toString();
         EditText editLight = (EditText) findViewById(R.id.edit_lightnumber);
         String light = editLight.getText().toString();
+        ToggleButton toggle_onoff = (ToggleButton) findViewById(R.id.toggle_onoff);
+        boolean onoff = toggle_onoff.isChecked();
+        SeekBar seekSat = (SeekBar) findViewById(R.id.seekbar_sat);
+        int sat = seekSat.getProgress();
+        SeekBar seekBri = (SeekBar) findViewById(R.id.seekbar_bri);
+        int bri = seekBri.getProgress();
+        EditText editHue = (EditText) findViewById(R.id.edit_hue);
+        int hue = Integer.parseInt(editHue.getText().toString());
 
         if(ip.length() > 8) { // add a proper IPv4 validation some day...
             //Intent intent = new Intent(this, DisplayMessageActivity.class);
             //intent.putExtra(EXTRA_MESSAGE, message);
             //startActivity(intent);
-            volleyPUTRequest(ip, HUE_USERNAME, light);
+
+            JSONObject json = generateJSON(onoff, sat, bri, hue);
+            volleyPUTRequest(ip, HUE_USERNAME, light, json);
         }
         else {
             showAlert(getString(R.string.alert_ip_title), getString(R.string.alert_ip_message));
@@ -112,16 +124,9 @@ public class MainActivity extends AppCompatActivity {
          Volley.newRequestQueue(this).add(stringRequest);
      }
 
-    private void volleyPUTRequest(String ip, String username, String light) {
+    private void volleyPUTRequest(String ip, String username, String light, JSONObject json) {
         //String url = "http://httpbin.org/html";
         String url = "http://"+ ip +"/api/" + username + "/lights/" + light + "/state";
-
-        final JSONObject json = new JSONObject();
-        try {
-            json.put("on", true);
-        } catch (JSONException e) {
-            // exception body
-        }
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.PUT, url, json,
                 new Response.Listener<JSONObject>() {
@@ -140,5 +145,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         Volley.newRequestQueue(this).add(jsonRequest);
+    }
+    private JSONObject generateJSON(boolean on, int sat, int bri, int hue) {
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("on", on);
+            json.put("sat", sat);
+            json.put("bri", bri);
+            json.put("hue", hue);
+        } catch (JSONException e) {
+            // exception body
+        }
+        return json;
     }
 }

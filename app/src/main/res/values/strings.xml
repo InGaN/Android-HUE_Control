@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">HUE_Control</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello HUE world!</string>
     <string name="action_settings">Settings</string>
     <string name="edit_ip">Enter bridge IP address</string>
     <string name="edit_lightnumber">Enter light number</string>
+    <string name="edit_hue">Enter hue</string>
     <string name="alert_ip_title">Invalid IP address</string>
     <string name="alert_ip_message">This is not a valid IP address</string>
     <string name="button_send">Send</string>
+    <string name="saturation">Sat:</string>
+    <string name="brightness">Bri:</string>
+    <string name="onoff_off">Light OFF</string>
+    <string name="onoff_on">Light ON</string>
     <string name="title_activity_display_message">My Message</string>
 </resources>
