@@ -1,0 +1,1 @@
+This is an Android project to control the HUE lights made by Philips.
