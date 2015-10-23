@@ -3,11 +3,15 @@ package com.example.kevin.hue_control;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class DisplayMessageActivity extends AppCompatActivity {
+public class HSBeditorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +19,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.LIGHT_ID);
 
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
+        setContentView(R.layout.activity_hsbeditor);
 
-        setContentView(textView);
+        TextView lightID = (TextView)findViewById(R.id.lbl_editor_lightid);
+        lightID.setText(message);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_hsbeditor, menu);
+        return true;
     }
 
     @Override

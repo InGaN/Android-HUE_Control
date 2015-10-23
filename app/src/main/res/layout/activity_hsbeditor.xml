@@ -5,35 +5,15 @@
     android:orientation="vertical"
     android:background="#010101">
 
-    <TextView android:text="@string/hello_world"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_title"
-        android:textColor="#ffffff"
-        android:gravity="center" />
-
-    <EditText
-    android:id="@+id/edit_ip"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="@string/edit_ip"
-    android:inputType="number"
-    android:maxLines="1"
-    android:maxLength="15"
-    android:digits="1234567890."
-    android:background="#eeeeee" />
-
-    <EditText
-        android:id="@+id/edit_lightnumber"
+    <TextView
+        android:id="@+id/lbl_editor_lightid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_lightnumber"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="2"
-        android:digits="1234567890"
-        android:layout_marginTop="20px"
-        android:background="#eeeeee" />
+        android:textColor="#ffffff"
+        android:text="@string/brightness"
+        />
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,6 +76,8 @@
         android:height="35px"
         android:onClick="sendMessage"
         android:layout_marginTop="50px"/>
+
+
 
     <ListView
         android:layout_width="wrap_content"

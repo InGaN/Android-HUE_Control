@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffff">
+
+    <TextView
+        android:id="@+id/editor_lbl_title"
+        android:text="@string/hello_world"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/editor_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_ip"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:digits="1234567890."
+        android:background="#eeeeee"
+        android:layout_marginLeft="10px"
+        android:layout_below="@+id/editor_lbl_title"/>
+
+    <ImageButton
+        android:id="@+id/btn_searchIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search"
+        android:width="35px"
+        android:height="35px"
+        android:onClick="seekLights"
+        android:layout_marginLeft="50px"
+        android:layout_toRightOf="@id/editor_ip"/>
+
+    <ListView
+        android:id="@+id/listviewMain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10px"
+        android:layout_below="@id/btn_searchIp"
+        />
+
+</RelativeLayout>
