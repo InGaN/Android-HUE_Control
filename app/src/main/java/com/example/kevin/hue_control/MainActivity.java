@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.lights_seeker); // activity_main
-        EditText editIP = (EditText)findViewById(R.id.editor_ip);
-        editIP.setText(HUE_IP);
+//        EditText editIP = (EditText)findViewById(R.id.editor_ip);
+//        editIP.setText(HUE_IP);
         HueKeys = new ArrayList<String>();
         HueLights = new ArrayList<HueLight>();
     }
@@ -80,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void seekLights(View view) {
-        EditText editIP = (EditText) findViewById(R.id.editor_ip);
-        String ip = editIP.getText().toString();
-
-        getLights(ip);
+//        EditText editIP = (EditText) findViewById(R.id.editor_ip);
+//        String ip = editIP.getText().toString();
+//
+//        getLights(ip);
+        callEditor(7);
     }
 
     public void sendMessage(View view) {
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
              public void onErrorResponse(VolleyError error) {
                  System.out.println("Something went wrong!");
                  error.printStackTrace();
+                 showAlert("error", "unable to locate Philips Bridge on this IP");
              }
          });
          Volley.newRequestQueue(this).add(stringRequest);

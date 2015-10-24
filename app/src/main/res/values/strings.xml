@@ -11,6 +11,7 @@
     <string name="button_send">Send</string>
     <string name="saturation">Sat:</string>
     <string name="brightness">Bri:</string>
+    <string name="hue">Hue:</string>
     <string name="onoff_off">Light OFF</string>
     <string name="onoff_on">Light ON</string>
     <string name="title_activity_display_message">My Message</string>
