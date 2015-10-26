@@ -18,12 +18,13 @@ public class HSBeditorActivity extends AppCompatActivity {
     private SeekBar seekHue;
     private SeekBar seekBri;
     private View colorBox;
+    private HueLight hueLight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         //String message = intent.getStringExtra(MainActivity.LIGHT_ID);
-        HueLight hueLight = (HueLight) intent.getParcelableExtra("incoming_light");
+        hueLight = (HueLight) intent.getParcelableExtra("incoming_light");
 
         setContentView(R.layout.activity_hsbeditor);
         seekHue = (SeekBar) findViewById(R.id.seekbar_hue);
@@ -82,19 +83,21 @@ public class HSBeditorActivity extends AppCompatActivity {
     }
 
     private void updateColorBlock() {
+        float hue = seekHue.getProgress();
         float sat = (float)seekSat.getProgress() / 100;
         float bri = (float)seekBri.getProgress() / 100;
-        float hue = seekHue.getProgress();
 
         TextView lightID = (TextView) findViewById(R.id.lbl_editor_lightid);
 
         float[] hsv = {hue, sat, bri};
-
         lightID.setText("#" + Integer.toHexString(Color.HSVToColor(hsv)));
         colorBox.setBackgroundColor(Color.HSVToColor(hsv));
     }
 
     public void updateHueLight(View view) {
-
+        hueLight.updateHueLight(seekHue.getProgress(), seekSat.getProgress(), seekBri.getProgress());
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("returning_light", true);
+        startActivity(intent);
     }
 }

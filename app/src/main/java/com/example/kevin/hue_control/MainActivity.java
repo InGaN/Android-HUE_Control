@@ -47,14 +47,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fillLightsList();
 
         setContentView(R.layout.lights_seeker); // activity_main
+
+        Intent intent = getIntent();
+        if(intent.getExtras() != null) {
+            if (intent.getBooleanExtra("returning_light", true)) {
+                fillListViewWithLights();
+                showAlert("UPDATE", "updating with new value");
+            }
+        }
+
 //        EditText editIP = (EditText)findViewById(R.id.editor_ip);
 //        editIP.setText(HUE_IP);
-
-        HueLights = new ArrayList<>();
-        HueLights.add(new HueLight(3, "Mario", "hue", true, 1000, 50, 100));
-        HueLights.add(new HueLight(3, "Luigi", "lux", true, 20000, 100, 50));
     }
 
     @Override
@@ -224,5 +230,12 @@ public class MainActivity extends AppCompatActivity {
             // exception body
         }
         return json;
+    }
+
+    private void fillLightsList() {
+        HueLights = new ArrayList<>();
+        HueLights.add(new HueLight(3, "Mario", "hue", true, 1000, 50, 100, 0));
+        HueLights.add(new HueLight(3, "Luigi", "hue", true, 20000, 100, 50, 1));
+        HueLights.add(new HueLight(3, "Wario", "hue", true, 10000, 100, 100, 2));
     }
 }

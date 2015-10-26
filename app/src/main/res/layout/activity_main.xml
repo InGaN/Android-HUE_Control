@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#010101">
+    android:background="#010101"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <TextView android:text="@string/hello_world"
         android:layout_width="match_parent"
@@ -11,17 +13,26 @@
         android:id="@+id/textView_title"
         android:textColor="#ffffff"
         android:gravity="center" />
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
 
+    <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+         to prevent the dummy from receiving focus again -->
+    <AutoCompleteTextView android:id="@+id/autotext"
+        android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:nextFocusUp="@id/autotext" android:nextFocusLeft="@id/autotext"/>
     <EditText
-    android:id="@+id/edit_ip"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="@string/edit_ip"
-    android:inputType="number"
-    android:maxLines="1"
-    android:maxLength="15"
-    android:digits="1234567890."
-    android:background="#eeeeee" />
+        android:id="@+id/edit_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_ip"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:digits="1234567890."
+        android:background="#eeeeee"/>
 
     <EditText
         android:id="@+id/edit_lightnumber"

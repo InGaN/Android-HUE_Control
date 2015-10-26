@@ -15,13 +15,15 @@ public class HueLight implements Parcelable {
     private int bri;
     private int hue;
     private int sat;
+    private int index;
 
-    public HueLight(int id, String name, String type) {
+    public HueLight(int id, String name, String type, int index) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.index = index;
     }
-    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness) {
+    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness, int index) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -29,6 +31,7 @@ public class HueLight implements Parcelable {
         this.hue = hue;
         this.sat = saturation;
         this.bri = brightness;
+        this.index = index;
     }
 
     public HueLight(Parcel in){
@@ -39,6 +42,7 @@ public class HueLight implements Parcelable {
         this.hue = in.readInt();
         this.sat = in.readInt();
         this.bri = in.readInt();
+        this.index = in.readInt();
     }
 
     public int getColor() {
@@ -47,21 +51,24 @@ public class HueLight implements Parcelable {
     }
 
     public int getId() { return id; }
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
     public String getType() { return type; }
-    public boolean isOn() {
-        return on;
-    }
-    public int getBrightness() {
-        return bri;
-    }
-    public int getHue() {
-        return hue;
-    }
+    public boolean isOn() { return on; }
+    public int getBrightness() { return bri; }
+    public int getHue() { return hue; }
     public int getHue360() { return hue/182; }
     public int getSaturation() { return sat; }
+    public int getIndex() { return index; }
+
+    public void updateHueLight(int hue, int saturation, int brightness) {
+        this.hue = hue;
+        this.sat = saturation;
+        this.bri = brightness;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public int describeContents() {
@@ -77,6 +84,7 @@ public class HueLight implements Parcelable {
         dest.writeInt(hue);
         dest.writeInt(sat);
         dest.writeInt(bri);
+        dest.writeInt(index);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
