@@ -37,13 +37,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.example.kevin.hue_control.MESSAGE";
     public final static String LIGHT_ID = "null";
     //public final static String HUE_USERNAME = "236382293a654a17372a0b6d38120b3b";
     public final static String HUE_USERNAME = "1df8f7461a539ea722e09eaa1935f3db";
     public final static String HUE_IP = "192.168.1.179";
 
-    private ArrayList<String> HueKeys;
     private ArrayList<HueLight> HueLights;
 
     @Override
@@ -53,8 +51,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.lights_seeker); // activity_main
 //        EditText editIP = (EditText)findViewById(R.id.editor_ip);
 //        editIP.setText(HUE_IP);
-        HueKeys = new ArrayList<String>();
-        HueLights = new ArrayList<HueLight>();
+
+        HueLights = new ArrayList<>();
+        HueLights.add(new HueLight(3, "Mario", "hue", true, 1000, 50, 100));
+        HueLights.add(new HueLight(3, "Luigi", "lux", true, 20000, 100, 50));
     }
 
     @Override
@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
 //        String ip = editIP.getText().toString();
 //
 //        getLights(ip);
-        callEditor(7);
+
+        fillListViewWithLights();
+        //callEditor(7);
     }
 
     public void sendMessage(View view) {
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             Iterator<String> iterator = jObject.keys();
             while(iterator.hasNext()) {
                 String key = iterator.next();
-                HueKeys.add(key);
+                //HueKeys.add(key);
             }
             fillListViewWithLights();
         }
@@ -165,27 +167,26 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(jsonEx.toString());
             showAlert("ERROR", "Unable to parse the JSON");
         }
-
-        HueLight lamp = new HueLight(1, "Mario");
     }
 
     private void fillListViewWithLights() {
-        ArrayAdapter<String> idListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, HueKeys);
+        //ArrayAdapter<String> idListAdapter = new ArrayAdapter<String>(this, R.layout.hue_listview_item, R.id.list_content, HueKeys);
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, HueLights);
 
         ListView idList = (ListView)findViewById(R.id.listviewMain);
-        idList.setAdapter(idListAdapter);
+        idList.setAdapter(customListAdapter);
 
         idList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callEditor(Integer.parseInt(HueKeys.get(position)));
+                callEditor(HueLights.get(position));
             }
         });
     }
 
-    private void callEditor(int id) {
+    private void callEditor(HueLight light) {
         Intent intent = new Intent(this, HSBeditorActivity.class);
-        intent.putExtra(LIGHT_ID, "ID: " + id);
+        intent.putExtra("incoming_light", light);
         startActivity(intent);
     }
 
