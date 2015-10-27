@@ -9,8 +9,8 @@
     <string name="alert_ip_title">Invalid IP address</string>
     <string name="alert_ip_message">This is not a valid IP address</string>
     <string name="button_send">Send</string>
-    <string name="saturation">Sat:</string>
-    <string name="brightness">Bri:</string>
+    <string name="saturation">Saturation:</string>
+    <string name="brightness">Brightness:</string>
     <string name="hue">Hue:</string>
     <string name="onoff_off">Light OFF</string>
     <string name="onoff_on">Light ON</string>

@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
                             jObject.getJSONObject(key).getJSONObject("state").getInt("hue"),
                             jObject.getJSONObject(key).getJSONObject("state").getInt("sat"),
                             jObject.getJSONObject(key).getJSONObject("state").getInt("bri"),
-                            (jObject.getJSONObject(key).getJSONObject("state").getString("effect").equals("colorloop"))
+                            (jObject.getJSONObject(key).getJSONObject("state").getString("effect").equals("colorloop")),
+                            jObject.getJSONObject(key).getJSONObject("state").getBoolean("reachable")
                     );
                     Lights.add(newLight);
                 }
@@ -146,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                         jObject.getJSONObject(key).getString("name").toString(),
                         jObject.getJSONObject(key).getString("modelid").toString(),
                         jObject.getJSONObject(key).getJSONObject("state").getBoolean("on"),
-                        jObject.getJSONObject(key).getJSONObject("state").getInt("bri")
+                        jObject.getJSONObject(key).getJSONObject("state").getInt("bri"),
+                        jObject.getJSONObject(key).getJSONObject("state").getBoolean("reachable")
                     );
                     Lights.add(newLight);
                 }

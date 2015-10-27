@@ -13,8 +13,8 @@ public class HueLight extends Light implements Parcelable {
     private int sat;
     private boolean colorLoop;
 
-    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness, boolean colorLoop) {
-        super(id, name, type, on);
+    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness, boolean colorLoop, boolean reachable) {
+        super(id, name, type, on, reachable);
         this.hue = hue;
         this.sat = saturation;
         this.bri = brightness;
@@ -22,7 +22,7 @@ public class HueLight extends Light implements Parcelable {
     }
 
     public HueLight(Parcel in){
-        super(in.readInt(), in.readString(), in.readString(), (in.readInt() > 0));
+        super(in.readInt(), in.readString(), in.readString(), (in.readInt() > 0), (in.readInt() > 0));
         this.hue = in.readInt();
         this.sat = in.readInt();
         this.bri = in.readInt();
@@ -60,6 +60,7 @@ public class HueLight extends Light implements Parcelable {
         dest.writeString(name);
         dest.writeString(type);
         dest.writeInt(on ? 1 : 0);
+        dest.writeInt(reachable ? 1 : 0);
         dest.writeInt(hue);
         dest.writeInt(sat);
         dest.writeInt(bri);

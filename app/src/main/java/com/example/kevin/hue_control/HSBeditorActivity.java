@@ -28,6 +28,10 @@ public class HSBeditorActivity extends AppCompatActivity {
     private SeekBar seekHue;
     private SeekBar seekBri;
     private ToggleButton toggleColorLoop;
+    private TextView lbl_colorbox;
+    private TextView lbl_hue;
+    private TextView lbl_saturation;
+    private TextView lbl_brightness;
     private View colorBox;
     private Light light;
     @Override
@@ -43,7 +47,10 @@ public class HSBeditorActivity extends AppCompatActivity {
         seekSat = (SeekBar) findViewById(R.id.seekbar_sat);
         seekBri = (SeekBar) findViewById(R.id.seekbar_bri);
         colorBox = findViewById(R.id.view_editor_colorbox);
-        TextView lightID = (TextView)findViewById(R.id.lbl_editor_lightid);
+        lbl_colorbox = (TextView)findViewById(R.id.lbl_colorbox);
+        lbl_hue = (TextView)findViewById(R.id.lbl_hue);
+        lbl_saturation = (TextView)findViewById(R.id.lbl_saturation);
+        lbl_brightness = (TextView)findViewById(R.id.lbl_brightness);
         ToggleButton toggleButton = (ToggleButton)findViewById(R.id.toggle_onoff);
         toggleColorLoop = (ToggleButton)findViewById(R.id.toggle_colorloop);
 
@@ -109,10 +116,10 @@ public class HSBeditorActivity extends AppCompatActivity {
             LuxLight luxLight = (LuxLight) light;
             seekHue.setEnabled(false);
             seekSat.setEnabled(false);
+            lbl_hue.setTextColor(Color.rgb(50,50,50));
+            lbl_saturation.setTextColor(Color.rgb(50, 50, 50));
             toggleColorLoop.setEnabled(false);
-            seekBri.setProgress((int) (luxLight.getBrightness()/2.55));
-            TextView lightID = (TextView)findViewById(R.id.lbl_editor_lightid);
-            lightID.setText(String.valueOf(luxLight.getBrightness()));
+            seekBri.setProgress((int) (luxLight.getBrightness() / 2.55));
         }
     }
 
@@ -121,7 +128,7 @@ public class HSBeditorActivity extends AppCompatActivity {
         float sat = (float)seekSat.getProgress() / 100;
         float bri = (float)seekBri.getProgress() / 100;
 
-        TextView lightID = (TextView) findViewById(R.id.lbl_editor_lightid);
+        TextView lightID = (TextView) findViewById(R.id.lbl_colorbox);
 
         float[] hsv = {hue, sat, bri};
         lightID.setText("#" + Integer.toHexString(Color.HSVToColor(hsv)));

@@ -8,12 +8,14 @@ public abstract class Light {
     protected String name;
     protected String type;
     protected boolean on;
+    protected boolean reachable;
 
-    public Light(int id, String name, String type, boolean on) {
+    public Light(int id, String name, String type, boolean on, boolean reachable) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.on = on;
+        this.reachable = reachable;
     }
 
     public int getId() {
@@ -28,6 +30,8 @@ public abstract class Light {
     public boolean isOn() {
         return on;
     }
-
+    public boolean isReachable() {
+        return reachable;
+    }
     public abstract int getColor();
 }

@@ -12,7 +12,7 @@
         android:background="#000000" />
 
     <TextView
-        android:id="@+id/lbl_editor_lightid"
+        android:id="@+id/lbl_colorbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
@@ -22,8 +22,29 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40px">
+        android:layout_marginTop="30px"
+        android:orientation="vertical">
         <TextView
+            android:id="@+id/lbl_hue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="@string/hue"
+            />
+        <SeekBar
+            android:id="@+id/seekbar_hue"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:max="360"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lbl_saturation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
@@ -35,11 +56,14 @@
             android:layout_height="wrap_content"
             android:max="100"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40px">
+        android:layout_marginTop="30px"
+        android:orientation="vertical">
         <TextView
+            android:id="@+id/lbl_brightness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
@@ -53,25 +77,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40px">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="@string/hue"
-            />
-        <SeekBar
-            android:id="@+id/seekbar_hue"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:max="360"/>
-    </LinearLayout>
-    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40px">
+        android:layout_marginTop="30px">
     <ToggleButton
         android:id="@+id/toggle_onoff"
         android:layout_width="wrap_content"
@@ -91,7 +99,6 @@
         android:layout_marginLeft="30px"/>
     </LinearLayout>
 
-
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,6 +106,6 @@
         android:width="35px"
         android:height="35px"
         android:onClick="updateHueLight"
-        android:layout_marginTop="150px"/>
+        android:layout_marginTop="30px"/>
 
 </LinearLayout>

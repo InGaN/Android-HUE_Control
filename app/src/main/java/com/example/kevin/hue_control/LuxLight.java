@@ -10,13 +10,13 @@ import android.os.Parcelable;
 public class LuxLight extends Light implements Parcelable {
     private int bri;
 
-    public LuxLight(int id, String name, String type, boolean on, int brightness) {
-        super(id, name, type, on);
+    public LuxLight(int id, String name, String type, boolean on, int brightness, boolean reachable) {
+        super(id, name, type, on, reachable);
         this.bri = brightness;
     }
 
     public LuxLight(Parcel in){
-        super(in.readInt(), in.readString(), in.readString(), (in.readInt() > 0));
+        super(in.readInt(), in.readString(), in.readString(), (in.readInt() > 0), (in.readInt() > 0));
         this.bri = in.readInt();
     }
 
@@ -44,6 +44,7 @@ public class LuxLight extends Light implements Parcelable {
         dest.writeString(name);
         dest.writeString(type);
         dest.writeInt(on ? 1 : 0);
+        dest.writeInt(reachable ? 1 : 0);
         dest.writeInt(bri);
     }
 
