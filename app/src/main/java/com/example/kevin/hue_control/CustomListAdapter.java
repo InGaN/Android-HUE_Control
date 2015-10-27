@@ -15,11 +15,11 @@ import com.android.volley.toolbox.ImageLoader;
 import java.util.List;
 
 
-public class CustomListAdapter extends ArrayAdapter<HueLight> {
+public class CustomListAdapter extends ArrayAdapter<Light> {
     private Activity activity;
-    private List<HueLight> hueLights;
+    private List<Light> hueLights;
 
-    public CustomListAdapter(Activity activity, List<HueLight> hueLights) {
+    public CustomListAdapter(Activity activity, List<Light> hueLights) {
         super(activity, R.layout.hue_listview_item, hueLights);
         this.activity = activity;
         this.hueLights = hueLights;
@@ -36,11 +36,11 @@ public class CustomListAdapter extends ArrayAdapter<HueLight> {
 
         text1.setText(hueLights.get(position).getName());
         String lightType = hueLights.get(position).getType();
-        text2.setText(lightType);
+        text2.setText("ID: " + hueLights.get(position).getId() + " - " + lightType);
 
         switch (lightType) {
-            case "hue":
-            case "lux":
+            case "LCT001":
+            case "LWB004":
             default:
                 img.setImageResource(R.drawable.list_icon_hue);
                 break;

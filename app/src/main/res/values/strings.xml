@@ -16,4 +16,5 @@
     <string name="onoff_on">Light ON</string>
     <string name="title_activity_display_message">My Message</string>
     <string name="title_activity_hsbeditor">HSBeditorActivity</string>
+    <string name="title_activity_brightness_editor">BrightnessEditorActivity</string>
 </resources>

@@ -7,46 +7,28 @@ import android.os.Parcelable;
 /**
  * Created by kevin on 2015/10/22.
  */
-public class HueLight implements Parcelable {
-    private int id;
-    private String name;
-    private String type;
-    private boolean on;
+public class HueLight extends Light implements Parcelable {
     private int bri;
     private int hue;
     private int sat;
-    private int index;
 
-    public HueLight(int id, String name, String type, int index) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.index = index;
-    }
-    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness, int index) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.on = on;
+    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness) {
+        super(id, name, type, on);
         this.hue = hue;
         this.sat = saturation;
         this.bri = brightness;
-        this.index = index;
     }
 
     public HueLight(Parcel in){
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.type = in.readString();
-        this.on = (in.readInt() > 0);
+        super(in.readInt(), in.readString(), in.readString(), (in.readInt() > 0));
         this.hue = in.readInt();
         this.sat = in.readInt();
         this.bri = in.readInt();
-        this.index = in.readInt();
     }
 
+    @Override
     public int getColor() {
-        float[] hsv = {(float)(hue/182.0), (float)sat, (float)bri};
+        float[] hsv = {(float)(hue/182.0), (float)sat/100, (float)bri/100};
         return (isOn()) ? Color.HSVToColor(hsv) : Color.BLACK;
     }
 
@@ -58,16 +40,11 @@ public class HueLight implements Parcelable {
     public int getHue() { return hue; }
     public int getHue360() { return hue/182; }
     public int getSaturation() { return sat; }
-    public int getIndex() { return index; }
 
     public void updateHueLight(int hue, int saturation, int brightness) {
         this.hue = hue;
         this.sat = saturation;
         this.bri = brightness;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -84,7 +61,6 @@ public class HueLight implements Parcelable {
         dest.writeInt(hue);
         dest.writeInt(sat);
         dest.writeInt(bri);
-        dest.writeInt(index);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
