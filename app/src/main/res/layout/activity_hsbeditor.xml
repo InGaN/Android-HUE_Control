@@ -68,6 +68,10 @@
             android:layout_height="wrap_content"
             android:max="360"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px">
     <ToggleButton
         android:id="@+id/toggle_onoff"
         android:layout_width="wrap_content"
@@ -76,6 +80,17 @@
         android:textOff="@string/onoff_off"
         android:textOn="@string/onoff_on"
         android:layout_marginTop="30px"/>
+    <ToggleButton
+        android:id="@+id/toggle_colorloop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:disabledAlpha="1.2"
+        android:textOff="@string/colorloop_off"
+        android:textOn="@string/colorloop_on"
+        android:layout_marginTop="30px"
+        android:layout_marginLeft="30px"/>
+    </LinearLayout>
+
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -84,17 +99,6 @@
         android:width="35px"
         android:height="35px"
         android:onClick="updateHueLight"
-        android:layout_marginTop="50px"/>
-
-
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_Main"
-        android:layout_below="@+id/textView_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="57dp" />
+        android:layout_marginTop="150px"/>
 
 </LinearLayout>

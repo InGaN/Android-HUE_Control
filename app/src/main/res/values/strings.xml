@@ -14,6 +14,8 @@
     <string name="hue">Hue:</string>
     <string name="onoff_off">Light OFF</string>
     <string name="onoff_on">Light ON</string>
+    <string name="colorloop_off">Colorloop OFF</string>
+    <string name="colorloop_on">Colorloop ON</string>
     <string name="title_activity_display_message">My Message</string>
     <string name="title_activity_hsbeditor">HSBeditorActivity</string>
     <string name="title_activity_brightness_editor">BrightnessEditorActivity</string>

@@ -27,6 +27,7 @@ public class HSBeditorActivity extends AppCompatActivity {
     private SeekBar seekSat;
     private SeekBar seekHue;
     private SeekBar seekBri;
+    private ToggleButton toggleColorLoop;
     private View colorBox;
     private Light light;
     @Override
@@ -44,6 +45,7 @@ public class HSBeditorActivity extends AppCompatActivity {
         colorBox = findViewById(R.id.view_editor_colorbox);
         TextView lightID = (TextView)findViewById(R.id.lbl_editor_lightid);
         ToggleButton toggleButton = (ToggleButton)findViewById(R.id.toggle_onoff);
+        toggleColorLoop = (ToggleButton)findViewById(R.id.toggle_colorloop);
 
         determineLightType();
 
@@ -101,11 +103,13 @@ public class HSBeditorActivity extends AppCompatActivity {
             seekHue.setProgress(hueLight.getHue360());
             seekSat.setProgress((int)(hueLight.getSaturation()/2.55));
             seekBri.setProgress((int)(hueLight.getBrightness()/2.55));
+            toggleColorLoop.setChecked(hueLight.isColorLoop());
         }
         else if (light.getType().equals("LWB004")) {
             LuxLight luxLight = (LuxLight) light;
             seekHue.setEnabled(false);
             seekSat.setEnabled(false);
+            toggleColorLoop.setEnabled(false);
             seekBri.setProgress((int) (luxLight.getBrightness()/2.55));
             TextView lightID = (TextView)findViewById(R.id.lbl_editor_lightid);
             lightID.setText(String.valueOf(luxLight.getBrightness()));
@@ -145,25 +149,24 @@ public class HSBeditorActivity extends AppCompatActivity {
     public void sendMessage() {
         ToggleButton toggle_onoff = (ToggleButton) findViewById(R.id.toggle_onoff);
         boolean onoff = toggle_onoff.isChecked();
-        SeekBar seekSat = (SeekBar) findViewById(R.id.seekbar_sat);
         int sat = (int)(seekSat.getProgress() * 2.55);
-        SeekBar seekBri = (SeekBar) findViewById(R.id.seekbar_bri);
         int bri = (int)(seekBri.getProgress() * 2.55);
-        SeekBar seekHue = (SeekBar) findViewById(R.id.seekbar_hue);
         int hue = seekHue.getProgress() * 182;
+        boolean colorLoop = toggleColorLoop.isChecked();
 
-        JSONObject json = generateJSON(onoff, sat, bri, hue);
+        JSONObject json = generateJSON(onoff, sat, bri, hue, colorLoop);
         volleyPUTRequest(MainActivity.HUE_IP, MainActivity.HUE_USERNAME, String.valueOf(light.getId()), json);
 
     }
 
-    private JSONObject generateJSON(boolean on, int sat, int bri, int hue) {
+    private JSONObject generateJSON(boolean on, int sat, int bri, int hue, boolean colorLoop) {
         final JSONObject json = new JSONObject();
         try {
             json.put("on", on);
             json.put("sat", sat);
             json.put("bri", bri);
             json.put("hue", hue);
+            json.put("effect", (colorLoop) ? "colorloop" : "none");
         } catch (JSONException e) {
             // exception body
         }

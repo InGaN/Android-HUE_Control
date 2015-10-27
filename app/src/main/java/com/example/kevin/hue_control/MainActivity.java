@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
                             jObject.getJSONObject(key).getJSONObject("state").getBoolean("on"),
                             jObject.getJSONObject(key).getJSONObject("state").getInt("hue"),
                             jObject.getJSONObject(key).getJSONObject("state").getInt("sat"),
-                            jObject.getJSONObject(key).getJSONObject("state").getInt("bri")
+                            jObject.getJSONObject(key).getJSONObject("state").getInt("bri"),
+                            (jObject.getJSONObject(key).getJSONObject("state").getString("effect").equals("colorloop"))
                     );
                     Lights.add(newLight);
                 }
@@ -184,13 +185,5 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("incoming_light", (LuxLight)light);
             startActivity(intent);
         }
-
-    }
-
-    private void fillLightsList() {
-        Lights = new ArrayList<>();
-        Lights.add(new HueLight(3, "Mario", "hue", true, 1000, 50, 100));
-        Lights.add(new HueLight(3, "Luigi", "hue", true, 20000, 100, 50));
-        Lights.add(new HueLight(3, "Wario", "hue", true, 10000, 100, 100));
     }
 }

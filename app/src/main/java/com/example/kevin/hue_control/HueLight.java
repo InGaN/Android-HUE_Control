@@ -11,12 +11,14 @@ public class HueLight extends Light implements Parcelable {
     private int bri;
     private int hue;
     private int sat;
+    private boolean colorLoop;
 
-    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness) {
+    public HueLight(int id, String name, String type, boolean on, int hue, int saturation, int brightness, boolean colorLoop) {
         super(id, name, type, on);
         this.hue = hue;
         this.sat = saturation;
         this.bri = brightness;
+        this.colorLoop = colorLoop;
     }
 
     public HueLight(Parcel in){
@@ -24,6 +26,7 @@ public class HueLight extends Light implements Parcelable {
         this.hue = in.readInt();
         this.sat = in.readInt();
         this.bri = in.readInt();
+        this.colorLoop = (in.readInt() > 0);
     }
 
     @Override
@@ -32,10 +35,7 @@ public class HueLight extends Light implements Parcelable {
         return (isOn()) ? Color.HSVToColor(hsv) : Color.BLACK;
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getType() { return type; }
-    public boolean isOn() { return on; }
+    public boolean isColorLoop() { return colorLoop; }
     public int getBrightness() { return bri; }
     public int getHue() { return hue; }
     public int getHue360() { return hue/182; }
@@ -46,7 +46,9 @@ public class HueLight extends Light implements Parcelable {
         this.sat = saturation;
         this.bri = brightness;
     }
-
+    public void setColorLoop(boolean colorLoop) {
+        this.colorLoop = colorLoop;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -61,6 +63,7 @@ public class HueLight extends Light implements Parcelable {
         dest.writeInt(hue);
         dest.writeInt(sat);
         dest.writeInt(bri);
+        dest.writeInt(colorLoop ? 1 : 0);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
